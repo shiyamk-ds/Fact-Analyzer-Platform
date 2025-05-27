@@ -110,6 +110,16 @@ const updateProfile = async (email, displayName) => {
   }
 };
 
+const getSecretKey = async (key) => {
+  try {
+    const response = await api.get(`/get-secret-key?key=${key}`);
+    return response.data;
+  } catch (error) {
+    throw new Error(error.response?.data.detail || "Registration failed");
+  }
+};
+
+
 export {
   registerUser,
   verifyUser,
@@ -117,4 +127,5 @@ export {
   updateTopicSelection,
   updateCountrySelection,
   updateProfile,
+  getSecretKey,
 };

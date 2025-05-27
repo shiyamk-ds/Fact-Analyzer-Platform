@@ -6,6 +6,7 @@ from utils.auth_util import hash_password, check_user_exists, get_user_from_db, 
 from config.db import users_collection
 import datetime
 import logging
+from utils.utils import get_secret_key, download_pdf
 
 logger = logging.getLogger(__name__)
 
@@ -114,3 +115,13 @@ async def update_profile(email: str = Form(...), display_name: str = Form(...)):
 #         return {"message": "Token is valid", "user": user_data}
 #     except Exception as e:
 #         raise HTTPException(status_code=500, detail=f"Token verification failed: {str(e)}")
+
+
+@auth_router.get("/get-secret-key")
+async def get_secret_key_endpoint(key: str):
+    try:
+        secret_value = get_secret_key(key)
+        return {"key": key, "value": secret_value}
+    except Exception as e:
+        logger.error(f"Failed to retrieve secret key {key}: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"Failed to retrieve secret key: {str(e)}")

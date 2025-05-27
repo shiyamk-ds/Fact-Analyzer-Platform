@@ -11,3 +11,6 @@ llama-index-llms-perplexity
 llama-index-core
 sqlalchemy>=2.0
 tenacity
+azure-identity
+azure-keyvault-secrets
+azure-storage-blob

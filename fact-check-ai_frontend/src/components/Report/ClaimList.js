@@ -1,4 +1,3 @@
-// ClaimList Component
 import React, { useState } from "react";
 import {
   Box,
@@ -8,10 +7,14 @@ import {
   Link,
   Stack,
   CardContent,
+  IconButton,
+  Snackbar,
 } from "@mui/joy";
-
+import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 
 export const ClaimList = ({ filteredClaims, actualReport, mode }) => {
+  const [openSnackbar, setOpenSnackbar] = useState(false);
+
   const openWithHighlight = (url, text) => {
     if (window.chrome) {
       const encodedText = encodeURIComponent(text);
@@ -19,6 +22,11 @@ export const ClaimList = ({ filteredClaims, actualReport, mode }) => {
     } else {
       window.open(url, "_blank", "noopener,noreferrer");
     }
+  };
+
+  const copyToClipboard = (text) => {
+    navigator.clipboard.writeText(text);
+    setOpenSnackbar(true);
   };
 
   const getCategoryTextColor = (category) => {
@@ -119,21 +127,30 @@ export const ClaimList = ({ filteredClaims, actualReport, mode }) => {
                               {domain}
                             </Chip>
                           </Box>
-                          <Link
-                            onClick={(e) => {
-                              e.preventDefault();
-                              openWithHighlight(source.url, source.relevant_evidence_excerpt);
-                            }}
-                            sx={{
-                              fontSize: "sm",
-                              display: "flex",
-                              alignItems: "center",
-                              gap: 0.5,
-                              fontWeight: "bold",
-                            }}
-                          >
-                            "{source.relevant_evidence_excerpt}"
-                          </Link>
+                          <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+                            <Link
+                              onClick={(e) => {
+                                e.preventDefault();
+                                openWithHighlight(source.url, source.relevant_evidence_excerpt);
+                              }}
+                              sx={{
+                                fontSize: "sm",
+                                display: "flex",
+                                alignItems: "center",
+                                gap: 0.5,
+                                fontWeight: "bold",
+                              }}
+                            >
+                              "{source.relevant_evidence_excerpt}"
+                            </Link>
+                            <IconButton
+                              size="sm"
+                              onClick={() => copyToClipboard(source.relevant_evidence_excerpt)}
+                              sx={{ color: mode === "dark" ? "neutral.50" : "neutral.900" }}
+                            >
+                              <ContentCopyIcon fontSize="small" />
+                            </IconButton>
+                          </Box>
                         </Box>
                       );
                     })}
@@ -144,6 +161,16 @@ export const ClaimList = ({ filteredClaims, actualReport, mode }) => {
           ))}
         </Stack>
       )}
+      <Snackbar
+        open={openSnackbar}
+        autoHideDuration={3000}
+        onClose={() => setOpenSnackbar(false)}
+        variant="soft"
+        color="success"
+        anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+      >
+        Text copied to clipboard
+      </Snackbar>
     </Box>
   );
 };
