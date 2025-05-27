@@ -172,3 +172,60 @@ cython_debug/
 
 # PyPI configuration file
 .pypirc
+
+# Existing .gitignore content
+
+# React.js specific ignores
+
+# See https://create-react-app.dev/docs/adding-custom-environment-variables/#what-other-env-files-can-be-used
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+
+# Dependency directories
+node_modules/
+jspm_packages/
+
+# Build output
+build/
+dist/
+
+# Coverage directory used by testing tools
+coverage/
+
+# Misc
+.DS_Store
+.env
+.env.test
+*.pem
+
+# Editor directories and files
+.idea
+.vscode
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Optional npm cache directory
+.npm
+
+# Optional eslint cache
+.eslintcache
+
+# Optional REACT_APP_ prefixed environment variables
+.env.*
+
+# Temporary files
+tmp/
+temp/
