@@ -13,7 +13,7 @@ Fact Analyzer Platform is a web application designed to combat misinformation by
 
 ## Tech Stack
 
-- **Frontend**: React.js with Tailwind CSS for responsive UI, including dark/light mode and dynamic visualizations.
+- **Frontend**: React.js with MUI built in components for responsive UI, including dark/light mode and dynamic visualizations.
 - **Backend**: FastAPI for high-performance API endpoints, handling requests for article, user, and report management.
 - **Authentication**: Firebase Authentication for secure signup, login, and email verification.
 - **Database**: MongoDB for scalable storage of articles, user profiles, and reports, with aggregation pipelines for report comparison.
